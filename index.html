@@ -11,13 +11,11 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--p:#1A0A2E;--p2:#2d1554;--g:#6BC910}
 body{font-family:"Montserrat",sans-serif;background:#0d0a1c;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 80px;color:#fff}
-/* PAGE HEADER */
-.ph{text-align:center;margin-bottom:36px}
+.ph{text-align:center;margin-bottom:32px}
 .ph-logo{background:var(--p);border-radius:12px;padding:12px 24px;display:inline-flex;align-items:center;margin-bottom:12px}
 .ph-logo img{height:26px;width:auto;display:block}
 .ph p{font-size:11px;font-weight:600;letter-spacing:.22em;color:var(--g);text-transform:uppercase}
-/* FORM */
-.fw{width:100%;max-width:420px;background:rgba(255,255,255,.04);border:1px solid rgba(107,201,16,.18);border-radius:20px;padding:28px;margin-bottom:40px}
+.fw{width:100%;max-width:400px;background:rgba(255,255,255,.04);border:1px solid rgba(107,201,16,.18);border-radius:20px;padding:28px;margin-bottom:36px}
 .fw h2{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8888a0;margin-bottom:20px}
 .field{margin-bottom:12px}
 .field label{display:block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8888a0;margin-bottom:6px}
@@ -30,101 +28,116 @@ body{font-family:"Montserrat",sans-serif;background:#0d0a1c;min-height:100vh;dis
 #thumb{display:none;width:52px;height:52px;border-radius:50%;object-fit:cover;margin:0 auto 8px;border:2px solid var(--g)}
 .btn-gen{width:100%;margin-top:8px;padding:13px;background:var(--g);border:none;border-radius:10px;font-family:"Montserrat",sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--p);cursor:pointer}
 .btn-gen:hover{opacity:.88}
-/* PREVIEW LABEL */
-.plbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8888a0;text-align:center;margin-bottom:16px}
-/* THE CARD — real size, no scaling */
+.plbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8888a0;text-align:center;margin-bottom:14px;display:none}
+
+/* ── THE CARD ── */
 #bc{
   width:400px;
-  min-height:640px;
   background:#fff;
-  border-radius:24px;
+  border-radius:28px;
   overflow:hidden;
   position:relative;
   font-family:"Montserrat",sans-serif;
   margin:0 auto;
-  box-shadow:0 32px 80px rgba(0,0,0,.55),0 0 0 1px rgba(107,201,16,.2);
+  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(107,201,16,.25);
   display:none;
 }
 #bc.vis{display:block}
+
 /* green top bar */
 .bc-tb{height:5px;background:var(--g);width:100%}
-/* purple header */
+
+/* purple header — taller so photo sits nicely inside */
 .bc-hd{
   background:var(--p);
   width:100%;
-  height:200px;
+  height:220px;
   position:relative;
-  display:flex;
-  align-items:flex-start;
-  padding:18px 22px;
+  padding:20px 24px 0;
 }
+/* wave bottom on header */
 .bc-hd::after{
   content:"";
   position:absolute;
-  bottom:-40px;left:0;right:0;
-  height:80px;
+  bottom:-38px;left:0;right:0;
+  height:76px;
   background:#fff;
-  clip-path:ellipse(55% 100% at 50% 100%);
+  clip-path:ellipse(52% 100% at 50% 100%);
   z-index:1;
 }
-.bc-dots{position:absolute;top:14px;right:14px;width:80px;height:80px;opacity:.07;background-image:radial-gradient(circle,#fff 1.5px,transparent 1.5px);background-size:13px 13px}
-/* logo in header */
-.bc-logo img{height:22px;width:auto;display:block;filter:brightness(0) invert(1);position:relative;z-index:2}
-/* photo circle — overlaps header and white body */
+.bc-dots{position:absolute;top:16px;right:16px;width:80px;height:80px;opacity:.06;background-image:radial-gradient(circle,#fff 1.5px,transparent 1.5px);background-size:13px 13px;z-index:0}
+.bc-logo img{height:24px;width:auto;display:block;filter:brightness(0) invert(1);position:relative;z-index:2}
+
+/* photo — fixed size, centered, overlaps the wave */
 .bc-photo-wrap{
   display:flex;
   justify-content:center;
-  margin-top:-60px;
+  margin-top:-56px;
   position:relative;
   z-index:10;
+  padding-bottom:0;
 }
 .bc-photo-ring{
-  width:120px;height:120px;
+  width:110px;height:110px;
   border-radius:50%;
   border:5px solid #fff;
   outline:3px solid var(--g);
-  outline-offset:3px;
+  outline-offset:2px;
   overflow:hidden;
   background:var(--p2);
+  flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 24px rgba(0,0,0,.2);
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+  position:relative;
 }
-.bc-photo-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
-.bc-ph-icon{opacity:.35}
-/* name role */
-.bc-info{text-align:center;padding:16px 24px 8px;z-index:5;position:relative}
-.bc-name{font-size:24px;font-weight:900;color:var(--p);letter-spacing:-.02em;line-height:1.1;margin-bottom:6px}
+.bc-photo-ring img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  display:none;
+}
+.bc-ph-svg{opacity:.35}
+
+/* name / role */
+.bc-info{text-align:center;padding:14px 24px 12px}
+.bc-name{font-size:26px;font-weight:900;color:var(--p);letter-spacing:-.02em;line-height:1.1;margin-bottom:6px}
 .bc-role{font-size:10px;font-weight:700;color:var(--g);letter-spacing:.2em;text-transform:uppercase}
+
 /* divider */
-.bc-div{height:1px;background:linear-gradient(90deg,transparent,rgba(26,10,46,.12),transparent);margin:14px 32px}
+.bc-div{height:1px;background:linear-gradient(90deg,transparent,rgba(26,10,46,.12),transparent);margin:12px 32px}
+
 /* contacts */
-.bc-con{padding:0 28px 4px}
-.bc-ci{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.bc-dot{width:6px;height:6px;border-radius:50%;background:var(--g);flex-shrink:0}
-.bc-val{font-size:13px;font-weight:600;color:#333;line-height:1.3;word-break:break-all}
+.bc-con{padding:4px 32px 8px}
+.bc-ci{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bc-dot{width:7px;height:7px;border-radius:50%;background:var(--g);flex-shrink:0}
+.bc-val{font-size:13px;font-weight:600;color:#2a2a3a;line-height:1.3;word-break:break-all}
+
 /* qr */
-.bc-qr{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0 20px}
+.bc-qr{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 0 18px}
 .bc-qbox{
-  width:150px;height:150px;
+  width:148px;height:148px;
   background:#fff;
   border-radius:14px;
-  border:1.5px solid rgba(26,10,46,.1);
-  box-shadow:0 3px 16px rgba(0,0,0,.1);
+  border:1.5px solid rgba(26,10,46,.09);
+  box-shadow:0 3px 14px rgba(0,0,0,.1);
   display:flex;align-items:center;justify-content:center;
   padding:8px;
 }
-#qri canvas,#qri img{width:134px!important;height:134px!important}
+#qri canvas,#qri img{width:132px!important;height:132px!important}
 .bc-qlbl{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#bbb}
+
 /* footer */
 .bc-foot{background:var(--p);display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 0}
 .bc-furl{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 .bc-fdot{width:3px;height:3px;border-radius:50%;background:var(--g)}
-.bc-ftag{font-size:9px;font-weight:600;letter-spacing:.1em;color:var(--g);opacity:.8}
-/* download */
-.btn-dl{display:block;width:400px;margin:16px auto 0;padding:13px;background:transparent;border:1.5px solid var(--g);border-radius:12px;font-family:"Montserrat",sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);cursor:pointer;transition:background .2s,color .2s;text-align:center;display:none}
+.bc-ftag{font-size:9px;font-weight:600;letter-spacing:.1em;color:var(--g);opacity:.85}
+
+/* buttons */
+.btn-dl{display:none;width:400px;margin:14px auto 0;padding:13px;background:transparent;border:1.5px solid var(--g);border-radius:12px;font-family:"Montserrat",sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);cursor:pointer;transition:background .2s,color .2s;text-align:center}
 .btn-dl.vis{display:block}
 .btn-dl:hover{background:var(--g);color:var(--p)}
-.inst{display:none;width:400px;margin:20px auto 0;padding:20px;background:rgba(107,201,16,.05);border:1px solid rgba(107,201,16,.15);border-radius:16px}
+.inst{display:none;width:400px;margin:18px auto 0;padding:20px;background:rgba(107,201,16,.05);border:1px solid rgba(107,201,16,.15);border-radius:16px}
 .inst.vis{display:block}
 .inst h3{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
 .inst li{font-size:12px;font-weight:500;color:rgba(255,255,255,.55);line-height:1.9;margin-left:16px}
@@ -157,9 +170,8 @@ body{font-family:"Montserrat",sans-serif;background:#0d0a1c;min-height:100vh;dis
   <button class="btn-gen" onclick="generate()">Generate My Card</button>
 </div>
 
-<div class="plbl" id="plbl" style="display:none">Preview — scan QR to save contact</div>
+<div class="plbl" id="plbl">Preview — scan QR to save contact</div>
 
-<!-- THE CARD -->
 <div id="bc">
   <div class="bc-tb"></div>
   <div class="bc-hd">
@@ -168,7 +180,7 @@ body{font-family:"Montserrat",sans-serif;background:#0d0a1c;min-height:100vh;dis
   </div>
   <div class="bc-photo-wrap">
     <div class="bc-photo-ring" id="bc-ring">
-      <svg class="bc-ph-icon" viewBox="0 0 60 60" fill="none" width="60" height="60">
+      <svg class="bc-ph-svg" viewBox="0 0 60 60" fill="none" width="56" height="56">
         <circle cx="30" cy="22" r="12" fill="white"/>
         <ellipse cx="30" cy="50" rx="20" ry="12" fill="white"/>
       </svg>
@@ -198,8 +210,8 @@ body{font-family:"Montserrat",sans-serif;background:#0d0a1c;min-height:100vh;dis
   <ol>
     <li><strong>Download</strong> — saves a high-res PNG to your device</li>
     <li><strong>Share</strong> — WhatsApp, email, or save to camera roll</li>
-    <li><strong>Recipient scans QR</strong> — contact saves instantly</li>
-    <li><strong>Works on any phone</strong> — no app needed</li>
+    <li><strong>Recipient scans QR</strong> — contact saves instantly to their phone</li>
+    <li><strong>Works on any phone</strong> — no app needed, standard vCard format</li>
   </ol>
 </div>
 
@@ -218,12 +230,6 @@ function handlePhoto(e) {
     var pi = document.getElementById('bcpimg');
     pi.src = d;
     pi.style.display = 'block';
-    pi.style.position = 'absolute';
-    pi.style.inset = '0';
-    pi.style.width = '100%';
-    pi.style.height = '100%';
-    pi.style.objectFit = 'cover';
-    pi.style.borderRadius = '50%';
     document.getElementById('bc-ring').querySelector('svg').style.display = 'none';
   };
   r.readAsDataURL(f);
@@ -256,7 +262,7 @@ function generate() {
   qel.innerHTML = '';
   new QRCode(qel, {
     text: buildVC(n, ro, em, ph),
-    width: 134, height: 134,
+    width: 132, height: 132,
     colorDark: '#1A0A2E', colorLight: '#ffffff',
     correctLevel: QRCode.CorrectLevel.M
   });
